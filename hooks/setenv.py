@@ -52,5 +52,11 @@ _bsddb _bsddb.c %(db)s
 )
     myfile.close()
     os.environ['OPT'] = os.environ['CFLAGS']
-    os.environ['MACOSX_DEPLOYMENT_TARGET'] = '10.5'
+    if os.uname()[0] == 'Darwin':
+        macosx_version = '10.3'
+        if os.uname()[2] == '9.6.0':
+                macosx_version = '10.5'
+        os.environ['MACOSX_DEPLOYMENT_TARGET'] = macosx_version
+        os.environ['CONFIGURE_MACOSX_DEPLOYMENT_TARGET'] = macosx_version
+        #os.environ['EXPORT_CONFIGURE_MACOSX_DEPLOYMENT_TARGET'] = macosx_version
 # vim:set ts=4 sts=4 et  :
